@@ -26,9 +26,12 @@
 (defroutes app-routes
   (GET "/" [] (html5
                [:head
-                (include-js "https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js")
                 (include-js "https://code.jquery.com/jquery-2.1.3.min.js")
-                (include-js "app.js")]
+                (include-js "https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js")
+                (include-js "app.js")
+                (include-css "style.css")
+
+                ]
                [:body
                 [:h2 "some numbers"]
                 [:div#pippo]]))
