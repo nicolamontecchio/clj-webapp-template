@@ -10,12 +10,22 @@
 
 
 (defn ext-process-output-stream [bin]
+  "lazy sequence of strings, one per line"
   (->> (.exec (Runtime/getRuntime) bin)
     .getInputStream
     clojure.java.io/reader
     line-seq))
 
+(defn stream-channeller [stream chan]
+  (map (partial async/>!! chan) stream))
 
-(defn test []
+(def shared-chan (async/chan 64))
+
+(defn test-a []
   (let [stream (ext-process-output-stream PROCESS-BIN)]
-    (doall (map println stream))))
+    (async/go (doall (stream-channeller stream shared-chan)))))
+
+
+(defn test-b []
+  (while true (println (async/<!! shared-chan)))
+  )
