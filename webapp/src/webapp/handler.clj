@@ -12,11 +12,6 @@
             [webapp.processhandler :as ph]))
 
 
-;; (defn page-login-post [post-params session]
-;;   (let [uid (get post-params :userid)]
-;;     (assoc (response (html [:p "login name is " [:b  uid]])) :session (assoc session :userid uid))))
-
-
 (defn stream-stuff [req]
   {:status 200
    :headers {"Content-Type" "text/event-stream"}
@@ -29,9 +24,7 @@
                 (include-js "https://code.jquery.com/jquery-2.1.3.min.js")
                 (include-js "https://cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.min.js")
                 (include-js "app.js")
-                (include-css "style.css")
-
-                ]
+                (include-css "style.css")]
                [:body
                 [:h2 "some numbers"]
                 [:div#pippo]]))
